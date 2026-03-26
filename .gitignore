@@ -2,4 +2,5 @@
 # Created by `dart pub`
 .dart_tool/
 git_push.sh
+git_push.bat
 Makefile
