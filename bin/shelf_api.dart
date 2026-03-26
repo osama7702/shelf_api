@@ -24,7 +24,8 @@ void main() async {
 
   // http://localhost:8080/process
   router.get('/process', (Request req) async {
-    var result = await Process.run("pwd", []);
+    // var result = await Process.run("pwd", []);
+    var result = await Process.run("sh", ["-c", "pwd && whoami"]);
 
     print("STDOUT: ${result.stdout}");
     print("STDERR: ${result.stderr}");
