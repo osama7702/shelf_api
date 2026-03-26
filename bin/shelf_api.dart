@@ -21,10 +21,14 @@ void main() async {
     return Response.ok('Number: $num');
   });
 
+  // http://localhost:8080/process
   router.get('/process', (Request req) async {
     var result = await Process.run("pwd", []);
+
+    print("STDOUT: ${result.stdout}");
+    print("STDERR: ${result.stderr}");
+    print("EXIT CODE: ${result.exitCode}");
     if (result.exitCode == 0) {
-      
       return Response.ok({
         'message': result.stdout.trim(),
         'status': 'success',
