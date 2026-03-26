@@ -1,6 +1,6 @@
 # https://dart.dev/guides/libraries/private-files
 # Created by `dart pub`
 .dart_tool/
-git_push.sh
+git_push_v2.sh
 git_push.bat
 Makefile
