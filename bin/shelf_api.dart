@@ -20,11 +20,25 @@ void main() async {
   router.get('/int/<num>', (Request req, String num) {
     return Response.ok('Number: $num');
   });
-  
+
+  router.get('/process', (Request req) async {
+    var result = await Process.run("pwd", []);
+    if (result.exitCode == 0) {
+      return Response.ok({
+        'message': result.stdout.trim(),
+        'status': 'success',
+      });
+    } else {
+      return Response.internalServerError(body: 'Error: ${result.stderr}');
+    }
+    // return Response.ok({'message': 'Processing complete', 'status': 'success'});
+  });
 
   router.get('/ask', (Request req) {
     final prompt = req.url.queryParameters['prompt'] ?? '';
-    final answer = prompt.isNotEmpty ? 'رد سريع على: $prompt' : 'لا يوجد Prompt';
+    final answer = prompt.isNotEmpty
+        ? 'رد سريع على: $prompt'
+        : 'لا يوجد Prompt';
     return Response.ok(answer);
   });
 
