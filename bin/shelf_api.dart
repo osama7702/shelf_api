@@ -10,12 +10,14 @@ void main() async {
     return Response.ok('Hello from Dart API!');
   });
 
+  // http://localhost:8080/num?num=42
   router.get('/num', (Request req) {
     final num = req.url.queryParameters['num'] ?? 'No number provided';
     return Response.ok('Number: $num');
   });
-  router.get('/int', (Request req) {
-    final num = req.url.pathSegments.isNotEmpty ? req.url.pathSegments.last : 'No number provided';
+
+  // http://localhost:8080/int/42
+  router.get('/int/<num>', (Request req, String num) {
     return Response.ok('Number: $num');
   });
 
