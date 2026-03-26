@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 import 'package:shelf/shelf.dart';
 import 'package:shelf/shelf_io.dart' as io;
@@ -29,10 +30,10 @@ void main() async {
     print("STDERR: ${result.stderr}");
     print("EXIT CODE: ${result.exitCode}");
     if (result.exitCode == 0) {
-      return Response.ok({
-        'message': result.stdout.trim(),
-        'status': 'success',
-      });
+      return Response.ok(
+        jsonEncode({'message': result.stdout.trim(), 'status': 'success'}),
+        headers: {'Content-Type': 'application/json'},
+      );
     } else {
       return Response.internalServerError(body: 'Error: ${result.stderr}');
     }
